@@ -1,4 +1,4 @@
-package org.zkpk.groupb;
+package chapter05.storm;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

@@ -1,4 +1,4 @@
-package org.zkpk.groupb;
+package chapter05.storm;
 
 import java.io.InputStream;
 import java.net.URI;

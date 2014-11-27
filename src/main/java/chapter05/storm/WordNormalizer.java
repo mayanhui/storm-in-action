@@ -1,4 +1,4 @@
-package org.zkpk.groupb;
+package chapter05.storm;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

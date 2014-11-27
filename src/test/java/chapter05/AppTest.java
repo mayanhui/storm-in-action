@@ -1,4 +1,4 @@
-package org.zkpk.groupb;
+package chapter05;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

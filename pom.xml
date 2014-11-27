@@ -23,7 +23,9 @@
 		<repository>
 			<id>github-releases</id>
 			<url>
+				
 				http://oss.sonatype.org/content/repositories/github-releases/
+			
 			</url>
 		</repository>
 	</repositories>
@@ -99,6 +101,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.11</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+
 
 	</dependencies>
 
