@@ -20,6 +20,12 @@
 			<id>maven</id>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
+		<repository>
+			<id>github-releases</id>
+			<url>
+				http://oss.sonatype.org/content/repositories/github-releases/
+			</url>
+		</repository>
 	</repositories>
 
 
@@ -29,9 +35,15 @@
 		<kafka.version>0.7.2</kafka.version>
 		<storm.version>0.8.2</storm.version>
 		<storm.kafka.version>0.8.0-wip4</storm.kafka.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka</artifactId>
@@ -210,6 +222,20 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass></mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
 				</configuration>
 			</plugin>
 		</plugins>
