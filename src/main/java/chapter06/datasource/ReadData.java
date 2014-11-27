@@ -1,4 +1,4 @@
-package com.lsw.day;
+package chapter06.datasource;
 
 public class ReadData {
 

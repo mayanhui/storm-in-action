@@ -1,4 +1,4 @@
-package net.kafka.consumer.wb;
+package chapter06.storm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.Map;
-import java.util.Random;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -21,27 +20,28 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
-public class WbSpout extends BaseRichSpout {
+public class GisSpout extends BaseRichSpout {
 	SpoutOutputCollector _collector;
-//	Random _rand;
+
+	// Random _rand;
 
 	@Override
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
 		_collector = collector;
-//		_rand = new Random();
+		// _rand = new Random();
 	}
 
 	@Override
 	public void nextTuple() {
-//		String[] sentences = new String[] { "the cow jumped over the moon",
-//				"an apple a day keeps the doctor away",
-//				"four score and seven years ago",
-//				"snow white and the seven dwarfs", "i am at two with nature" };
-//		String sentence = sentences[_rand.nextInt(sentences.length)];
-//		_collector.emit(new Values(sentence));
+		// String[] sentences = new String[] { "the cow jumped over the moon",
+		// "an apple a day keeps the doctor away",
+		// "four score and seven years ago",
+		// "snow white and the seven dwarfs", "i am at two with nature" };
+		// String sentence = sentences[_rand.nextInt(sentences.length)];
+		// _collector.emit(new Values(sentence));
 
-		String uri = "hdfs://master:9000/weibo/1387159770_1087770692_20100101000000_VCSvoMgPvrSTKhCkkIA7uMV9Hn10877706927159770ouss.json";
+		String uri = "hdfs://master:9000/gps/car";
 		InputStream in = null;
 		try {
 			Configuration conf = new Configuration();
@@ -71,7 +71,7 @@ public class WbSpout extends BaseRichSpout {
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("wb_json"));
+		declarer.declare(new Fields("gis_lk"));
 	}
 
 }

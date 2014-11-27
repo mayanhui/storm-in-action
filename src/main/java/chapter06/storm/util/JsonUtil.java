@@ -1,4 +1,4 @@
-package net.kafka.consumer.util;
+package chapter06.storm.util;
 
 import java.io.IOException;
 import java.util.ArrayList;

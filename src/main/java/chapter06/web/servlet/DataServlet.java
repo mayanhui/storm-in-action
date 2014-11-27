@@ -1,4 +1,4 @@
-package com.cyt.servlet;
+package chapter06.web.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cyt.util.Sdata;
+import chapter06.web.util.Sdata;
+
 
 public class DataServlet extends HttpServlet {
 	Object o;

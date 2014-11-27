@@ -1,4 +1,4 @@
-package net.kafka.consumer.dao;
+package chapter06.storm.dao;
 
 
 

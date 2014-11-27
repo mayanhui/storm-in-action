@@ -1,4 +1,4 @@
-package com.cyt.model;
+package chapter06.web.model;
 
 public class Car {
 	private int DirectId;

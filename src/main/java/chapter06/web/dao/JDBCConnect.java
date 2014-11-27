@@ -1,4 +1,4 @@
-package com.cyt.dao;
+package chapter06.web.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cyt.model.Car;
+import chapter06.web.model.Car;
 
 
 

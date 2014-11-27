@@ -1,4 +1,4 @@
-package net.kafka.consumer.lk;
+package chapter06.storm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,10 +8,6 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
-import net.kafka.consumer.dao.JDBC;
-import net.kafka.consumer.util.ConfigFactory;
-import net.kafka.consumer.util.ConfigProperties;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -30,6 +26,9 @@ import backtype.storm.topology.IBasicBolt;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
+import chapter06.storm.dao.JDBC;
+import chapter06.storm.util.ConfigFactory;
+import chapter06.storm.util.ConfigProperties;
 //import org.apache.hadoop.hbase.client.HBaseAdmin;
 //import net.sf.json.JSONObject;
 

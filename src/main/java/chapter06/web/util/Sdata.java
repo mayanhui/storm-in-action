@@ -1,10 +1,10 @@
-package com.cyt.util;
+package chapter06.web.util;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cyt.dao.JDBCConnect;
+import chapter06.web.dao.JDBCConnect;
 
 
 public class Sdata extends JDBCConnect{

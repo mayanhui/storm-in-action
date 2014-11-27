@@ -1,4 +1,4 @@
-package net.kafka.consumer.lk;
+package chapter06.storm;
 
 //import java.util.ArrayList;
 //import java.util.List;
