@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+path{
+  stroke:steelblue
+  stroke-width:2;
+  fill:none;
+}
+
+.axis path,
+.axis line {
+  fill: none; 
+  stroke: #000;
+  stroke-width:1;
+  shape-rendering: crispEdges;
+}
+
+.area.above {
+  fill: rgb(252,141,89);
+}
+
+.area.below {
+  fill: rgb(145,207,96);
+}
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+</style>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+<script>
+/*设置边距和图表大小。 我们设定画布的大小为：width:960,height:500，
+用一个margin对象来存储图表的边距信息，计算出图表的宽度和高度 */
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+/*格式化date*/
+var parseDate = d3.time.format("%Y%m%d").parse;
+/*设置横轴方向和纵轴方向的区域(Domains)和范围(Ranges)*/
+var x = d3.time.scale()
+    .range([0, width]);
+var y = d3.scale.linear()
+    .range([height, 0]);
+//_____________________
+var x2=d3.time.scale().range([0,width]);
+/*设置坐标轴*/
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom").ticks(7);
+
+var yAxis = d3.svg.axis()
+	.scale(y)
+    .orient("left");
+    
+//_____________________
+var x2Axis=d3.svg.axis().scale(x2).orient("top").ticks(7);
+/*为划线添加数据*/
+var line = d3.svg.area()
+    .interpolate("basis")
+    .x(function(d) { return x(d.date1); })
+    .y(function(d) { return y(d["Total1"]); });
+
+var area = d3.svg.area()
+    .interpolate("basis")
+    .x(function(d) { return x(d.date1); })
+    .y1(function(d) { return y(d["Total1"]); });
+    
+/*添加画布
+d3.select(“body”)选择body元素，然后在body里面增加一个子元素”svg”,
+给这个svg设定一些属性，再往“svg”中添加一个”g”元素并设定一些属性。
+*/
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+/*Get the data*/
+d3.tsv("total.tsv", function(error, data) {
+  data.forEach(function(d) {
+   // d.date = parseDate(d.date); /*将d.date数据用前面定义的parseDate方法来格式化，将结果返回给d.date*/
+    d.date1= parseDate(d.date1);
+    d.date2= parseDate(d.date2);
+    d["Total1"]= +d["Total1"]; /*将d["Total"]转化为数字*/
+    d["Total2"]= +d["Total2"];
+  });
+/*这段代码是为了让我们导入的数据与图表的大小相适应，range知道是图表范围的大小，
+他是一个尺寸大小。这段代码告诉D3我们要画些东西在x轴上，这些东西是时间/日期的一个实体。*/
+  x.domain(d3.extent(data, function(d) { return d.date1;}));
+  
+  y.domain([
+    d3.min(data, function(d) { return Math.min(d["Total1"], d["Total2"]); }),
+    d3.max(data, function(d) { return Math.max(d["Total1"], d["Total2"]); })
+  ]);
+//_____________________
+  x2.domain(d3.extent(data,function(d) { return d.date2;}));
+  svg.datum(data);
+
+  svg.append("clipPath")
+      .attr("id", "clip-below")
+    .append("path")
+      .attr("d", area.y0(height));
+
+  svg.append("clipPath")
+      .attr("id", "clip-above")
+    .append("path")
+      .attr("d", area.y0(0));
+
+  svg.append("path")
+      .attr("class", "area above")
+      .attr("clip-path", "url(#clip-above)")
+      .attr("d", area.y0(function(d) { return y(d["Total2"]); }));
+
+  svg.append("path")
+      .attr("class", "area below")
+      .attr("clip-path", "url(#clip-below)")
+      .attr("d", area);
+
+  svg.append("path")
+      .attr("class", "line")
+      .attr("d", line);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+//_____________________
+  svg.append("g")
+  	  .attr("class","x axis")
+//	  .attr("transform", "translate(0," + height + ")")
+  	  .call(x2Axis);
+  	  
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Num");
+  
+});
+</script>
+</body>
+</html>
