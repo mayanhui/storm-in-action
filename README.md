@@ -1,1 +1,1 @@
-<<Storm in Action>> source code
+Book: "Storm in Action", source code
