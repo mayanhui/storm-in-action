@@ -1,10 +1,10 @@
 package chapter04.web.bean;
 
-public class StormBean {
+public class LatLngBean {
 	private  double lng;
 	private  double lat;
 	private  String  address;
-	public StormBean(){
+	public LatLngBean(){
 		
 	}
 	public double getLng() {
