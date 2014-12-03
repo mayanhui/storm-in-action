@@ -20,9 +20,11 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
+@SuppressWarnings("serial")
 public class ReaderSpout extends BaseRichSpout {
 	SpoutOutputCollector _collector;
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
@@ -42,7 +44,7 @@ public class ReaderSpout extends BaseRichSpout {
 			String line = null;
 			while (null != (line = br.readLine())) {
 				_collector.emit(new Values(line));
-				//Utils.sleep(100);
+				Utils.sleep(100);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
