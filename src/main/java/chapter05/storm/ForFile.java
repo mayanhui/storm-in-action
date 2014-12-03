@@ -14,7 +14,7 @@ public class ForFile {
 
 	public InputStream in;
 	public int last;
-	MyConfiguration conf1=new MyConfiguration();
+	AppConfiguration conf1=new AppConfiguration();
 	public InputStream getIn() {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
     		 Date d=new Date();

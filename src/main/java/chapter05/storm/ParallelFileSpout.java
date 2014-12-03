@@ -32,7 +32,7 @@ public class ParallelFileSpout extends BaseRichSpout {
 	public SpoutOutputCollector collector;
  //   private FileReader fileReader;
    public InputStream in;
-  public  MyConfiguration conf1=new MyConfiguration();
+  public  AppConfiguration conf1=new AppConfiguration();
    public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd-HH");
 	public static Date d=new Date();
    public static String dir1=sdf.format(d);

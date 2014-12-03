@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.apache.hadoop.conf.Configuration;
 
-public class MyConfiguration extends Configuration implements Serializable{
+@SuppressWarnings("serial")
+public class AppConfiguration extends Configuration implements Serializable{
 
 }
