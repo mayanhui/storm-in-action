@@ -1,4 +1,4 @@
-package chapter04.web.jdbc;
+package chapter04.web.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import chapter04.web.bean.LatLngBean;
 
-public class Stormjdbc {
+public class LatLngDao {
 	private static String url = "jdbc:mysql://localhost:3306/test";
 	private static String user = "root";
 	private static String password = "1";
