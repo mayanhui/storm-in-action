@@ -13,7 +13,7 @@ import chapter04.web.bean.StormBean;
 import chapter04.web.service.StormService;
 
 
-public class Myservlet extends HttpServlet {
+public class StormServlet extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
