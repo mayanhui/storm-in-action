@@ -35,7 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 addMap(value_lng,value_lat);
 		
 		 <%}%>
-		//alter("1");
 	}
 	function addMap(value_lng,value_lat){
 	 	  
@@ -54,13 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	setInterval("getPoint();",1000);
 	setInterval("clean();",2000);
 	
-	//try{Thread.sleep(1000);}catch(Exception e){} 
-	//window.setInterval("getPoint()",1000);
 	function stop(){
-	 //clearInterval(s);
 	 map.clearOverlays(); 
 	}
-	//getPoint();
 	</script>
 	
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
