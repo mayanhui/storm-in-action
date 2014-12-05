@@ -42,7 +42,7 @@ public class GetAreaBolt implements IBasicBolt {
 					+ "' between minip and maxip";
 			st = conn.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-			String name = rs.getString("Name");
+			String name = rs.getString("area");
 			return name;
 			// conn.close(); //关闭数据库连接
 		} catch (SQLException e) {

@@ -29,6 +29,8 @@ public class GetLongitudeBolt implements IBasicBolt {
 	private HashMap<String, String> longitude = new HashMap<String, String>();
 	static Connection conn;
 	static Statement st;
+	
+	private String uri = "hdfs://master:9000/storm/lng-lat-mapping.txt";
 
 	/* 获取数据库连接的函数 */
 	public static Connection getConnection() {
@@ -46,11 +48,10 @@ public class GetLongitudeBolt implements IBasicBolt {
 	public static void insert(String area, String jing, String wei) {
 		conn = getConnection(); // 首先要获取连接，即连接到数据库
 		try {
-			String sql = "INSERT INTO position(area,jing,wei)" + " VALUES ('"
+			String sql = "INSERT INTO position(area,lng,lat)" + " VALUES ('"
 					+ area + "','" + jing + "','" + wei + "')"; // 插入数据的sql语句
 			st = (Statement) conn.createStatement(); // 创建用于执行静态sql语句的Statement对象
 			st.executeUpdate(sql); // 执行插入操作的sql语句，并返回插入数据的个数
-			// System.out.println("向position表中插入 " + count + " 条数据");
 			// //输出插入操作的处理结果
 			conn.close(); // 关闭数据库连接
 		} catch (SQLException e) {
@@ -68,7 +69,7 @@ public class GetLongitudeBolt implements IBasicBolt {
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("area", "jing", "wei"));
+		declarer.declare(new Fields("area", "lng", "lat"));
 	}
 
 	@Override
@@ -83,16 +84,13 @@ public class GetLongitudeBolt implements IBasicBolt {
 		try {
 			st = (Statement) conn.createStatement();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		String uri = "hdfs://master:9000/storm/jingweidu.txt";
+		
 		InputStream in = null;
-		Configuration conf2 = new Configuration();
-
-		FileSystem fs;
+		FileSystem fs = null;
 		try {
-			fs = FileSystem.get(URI.create(uri), conf2);
+			fs = FileSystem.get(URI.create(uri), new Configuration());
 			in = fs.open(new Path(uri));
 		} catch (IOException e) {
 			e.printStackTrace();
