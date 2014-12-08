@@ -29,33 +29,31 @@ public class GetLongitudeBolt implements IBasicBolt {
 	private HashMap<String, String> longitude = new HashMap<String, String>();
 	static Connection conn;
 	static Statement st;
-	
+
 	private String uri = "hdfs://master:9000/storm/lng-lat-mapping.txt";
 
-	/* 获取数据库连接的函数 */
 	public static Connection getConnection() {
-		Connection con = null; // 创建用于连接数据库的Connection对象
+		Connection con = null; // get connection
 		try {
-			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
+			Class.forName("com.mysql.jdbc.Driver");// load Mysql driver
 			con = DriverManager.getConnection(
-					"jdbc:mysql://192.168.32.72:3306/test", "hadoop", "hadoop");// 创建数据连接,hadoop
+					"jdbc:mysql://192.168.32.72:3306/test", "hadoop", "hadoop");
 		} catch (Exception e) {
-			System.out.println("数据库连接失败" + e.getMessage());
+			System.out.println("connect mysql failed! " + e.getMessage());
 		}
-		return con; // 返回所建立的数据库连接
+		return con; // return connection
 	}
 
 	public static void insert(String area, String jing, String wei) {
-		conn = getConnection(); // 首先要获取连接，即连接到数据库
+		conn = getConnection(); // get connection
 		try {
 			String sql = "INSERT INTO position(area,lng,lat)" + " VALUES ('"
-					+ area + "','" + jing + "','" + wei + "')"; // 插入数据的sql语句
-			st = (Statement) conn.createStatement(); // 创建用于执行静态sql语句的Statement对象
-			st.executeUpdate(sql); // 执行插入操作的sql语句，并返回插入数据的个数
-			// //输出插入操作的处理结果
-			conn.close(); // 关闭数据库连接
+					+ area + "','" + jing + "','" + wei + "')"; 
+			st = (Statement) conn.createStatement(); // create static sql statement
+			st.executeUpdate(sql); // exec sql 
+			conn.close(); // close connection
 		} catch (SQLException e) {
-			System.out.println("插入数据失败" + e.getMessage());
+			System.out.println("insert failed! " + e.getMessage());
 		}
 	}
 
@@ -86,7 +84,7 @@ public class GetLongitudeBolt implements IBasicBolt {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		InputStream in = null;
 		FileSystem fs = null;
 		try {

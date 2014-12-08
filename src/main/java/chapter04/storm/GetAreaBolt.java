@@ -26,7 +26,7 @@ public class GetAreaBolt implements IBasicBolt {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");// load Mysql driver
 			con = DriverManager.getConnection(
-					"jdbc:mysql://192.168.32.72:3306/test", "hadoop", "hadoop");// 创建数据连接,hadoop
+					"jdbc:mysql://192.168.32.72:3306/test", "hadoop", "hadoop");
 		} catch (Exception e) {
 			System.out.println("Connection failed! " + e.getMessage());
 		}
