@@ -21,22 +21,21 @@ public class GetAreaBolt implements IBasicBolt {
 	static Connection conn;
 	static Statement st;
 
-	/* 获取数据库连接的函数 */
 	public static Connection getConnection() {
-		Connection con = null; // 创建用于连接数据库的Connection对象
+		Connection con = null; // define Connection
 		try {
-			Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
+			Class.forName("com.mysql.jdbc.Driver");// load Mysql driver
 			con = DriverManager.getConnection(
 					"jdbc:mysql://192.168.32.72:3306/test", "hadoop", "hadoop");// 创建数据连接,hadoop
 		} catch (Exception e) {
-			System.out.println("数据库连接失败" + e.getMessage());
+			System.out.println("Connection failed! " + e.getMessage());
 		}
 		return con;
 
 	}
 
 	public static String select(long ipp) {
-		conn = getConnection(); // 首先要获取连接，即连接到数据库
+		conn = getConnection(); // get connection
 		try {
 			String sql = "select area from ip where '" + ipp
 					+ "' between minip and maxip";
@@ -44,9 +43,9 @@ public class GetAreaBolt implements IBasicBolt {
 			ResultSet rs = st.executeQuery(sql);
 			String name = rs.getString("area");
 			return name;
-			// conn.close(); //关闭数据库连接
+			// conn.close(); //close connection
 		} catch (SQLException e) {
-			System.out.println("失败" + e.getMessage());
+			System.out.println("failed! " + e.getMessage());
 			return null;
 		}
 
@@ -60,13 +59,14 @@ public class GetAreaBolt implements IBasicBolt {
 		collector.emit(new Values(select(longIp)));
 	}
 
-	public static long ipToLong(String strIp) {// 将127.0.0.1形式的IP地址转换成十进制整数
+	public static long ipToLong(String strIp) {
+		// transfer ip like 127.0.0.1 to decimal integer
 		long[] ip = new long[4];
-		// 先找到IP地址字符串中.的位置
+		// find the position of dot
 		int position1 = strIp.indexOf(".");
 		int position2 = strIp.indexOf(".", position1 + 1);
 		int position3 = strIp.indexOf(".", position2 + 1);
-		// 将每个.之间的字符串转换成整型
+		// transfer string to integer
 		ip[0] = Long.parseLong(strIp.substring(0, position1));
 		ip[1] = Long.parseLong(strIp.substring(position1 + 1, position2));
 		ip[2] = Long.parseLong(strIp.substring(position2 + 1, position3));
@@ -87,12 +87,12 @@ public class GetAreaBolt implements IBasicBolt {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context) {
-		conn = getConnection(); // 首先要获取连接，即连接到数据库
+		conn = getConnection();
 		try {
 			st = conn.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} // 创建用于执行静态sql语句的Statement对象
+		}
 	}
 
 	@Override
