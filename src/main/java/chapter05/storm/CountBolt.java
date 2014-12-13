@@ -15,7 +15,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
-public class WordCount extends BaseBasicBolt {
+public class CountBolt extends BaseBasicBolt {
 
 	Integer id;
 	String name;
