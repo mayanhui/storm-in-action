@@ -14,13 +14,15 @@ import backtype.storm.tuple.Values;
 
 @SuppressWarnings("serial")
 public class DetectionBolt extends BaseBasicBolt {
-
 	private Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 	private Map<String, Set<String>> map1 = new HashMap<String, Set<String>>();
 	private Map<String, Set<String>> map2 = new HashMap<String, Set<String>>();
 
+	//condition1: natIP去重求和数 > 5 
 	private boolean flag = true;
+	//condition2: qqid去重求和数 > 20
 	private boolean flag1 = true;
+	//condition3: 	cookieValue + devName + osName去重求和数 > 5
 	private boolean flag2 = true;
 
 	public void cleanup() {
