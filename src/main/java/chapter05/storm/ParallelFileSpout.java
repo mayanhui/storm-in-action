@@ -26,15 +26,14 @@ public class ParallelFileSpout extends BaseRichSpout {
 
 	public int last;
 	public SpoutOutputCollector collector;
-	// private FileReader fileReader;
 	public InputStream in;
 	public AppConfiguration conf1 = new AppConfiguration();
 	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH");
-	public static Date d = new Date();
-	public static String dir1 = sdf.format(d);
-	public static String dir = dir1.substring(0, 10);
-	public static String hour = dir1.substring(11, 13);
-	public static Map conf;
+	public Date d = new Date();
+	public String dir1 = sdf.format(d);
+	public String dir = dir1.substring(0, 10);
+	public String hour = dir1.substring(11, 13);
+	public Map conf;
 	FileSystem fs;
 
 	String uri = "hdfs://192.168.29.32:9000/flume/" + dir;
@@ -65,32 +64,23 @@ public class ParallelFileSpout extends BaseRichSpout {
 			}
 			return;
 		}
-		myReader();
+		read();
 
 	}
 
-	public void myReader() {
+	public void read() {
 		String str;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		try {
 			while ((str = reader.readLine()) != null) {
-				System.out.println("WordReader类 读取到一行数据：" + str);
-				// this.collector.emit(new Values(str),str);
-				// collector.emit(new Values("key1","value1"));
 				String str1 = str + "\t" + dir + "\t" + last + "\t" + hour;
 				collector.emit(new Values(str1));
-				// collector.emit("zrk",new Values(str1) );
-				// collector.e
-				// collector.e
-				System.out.println("WordReader类 发射了一条数据：" + str);
 			}
 			collector.emit(new Values("over"));
 			Thread.sleep(30000);
-			System.out.println("((((((((((((((((((((((((((((((((((((((((((("
-					+ last);
 			if (last != getFilesNum()) {
 				getIn();
-				myReader();
+				read();
 			}
 
 		} catch (Exception e) {
@@ -100,6 +90,7 @@ public class ParallelFileSpout extends BaseRichSpout {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void open(Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
