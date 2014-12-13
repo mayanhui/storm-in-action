@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FileUtil;
@@ -33,13 +32,16 @@ public class ParallelFileSpout extends BaseRichSpout {
 	public String dir1 = sdf.format(d);
 	public String dir = dir1.substring(0, 10);
 	public String hour = dir1.substring(11, 13);
+	@SuppressWarnings("rawtypes")
 	public Map conf;
 	FileSystem fs;
 
 	String uri = "hdfs://192.168.29.32:9000/flume/" + dir;
 	private boolean completed = false;
 
-	// storm在检测到一个tuple被整个topology成功处理的时候调用ack，否则调用fail。
+	/**
+	 * when successfully process topology, send ack. then send fail.
+	 */
 	public void ack(Object msgId) {
 		System.out.println("OK:" + msgId);
 
@@ -48,13 +50,15 @@ public class ParallelFileSpout extends BaseRichSpout {
 	public void close() {
 	}
 
-	// storm在检测到一个tuple被整个topology成功处理的时候调用ack，否则调用fail。
+	/**
+	 * when successfully process topology, send ack. then send fail.
+	 */
 	public void fail(Object msgId) {
 		System.out.println("FAIL:" + msgId);
 	}
 
-	/*
-	 * 在SpoutTracker类中被调用，每调用一次就可以向storm集群中发射一条数据（一个tuple元组），该方法会被不停的调用
+	/**
+	 * called in SpoutTracker. called once, send a single tuple.
 	 */
 	public void nextTuple() {
 		if (completed) {
@@ -164,9 +168,7 @@ public class ParallelFileSpout extends BaseRichSpout {
 	}
 
 	/**
-	 * 定义字段id，该id在简单模式下没有用处，但在按照字段分组的模式下有很大的用处。
-	 * 该declarer变量有很大作用，我们还可以调用declarer.
-	 * declareStream();来定义stramId，该id可以用来定义更加复杂的流拓扑结构
+	 * define field. used for grouping by field.
 	 */
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		declarer.declare(new Fields("word1"));
