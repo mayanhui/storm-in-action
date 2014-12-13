@@ -1,4 +1,4 @@
-package chapter05.storm;
+package chapter05;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -9,6 +9,8 @@ import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.FileUtil;
 import org.apache.hadoop.fs.Path;
+
+import chapter05.storm.AppConfiguration;
 
 public class ForFile {
 
