@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.BasicOutputCollector;
@@ -15,6 +13,7 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
+@SuppressWarnings("serial")
 public class CountBolt extends BaseBasicBolt {
 
 	Integer id;
@@ -27,22 +26,22 @@ public class CountBolt extends BaseBasicBolt {
 	private String driver = "com.mysql.jdbc.Driver";
 	private String username = "zkpk";
 	private PreparedStatement st = null;
-	private Set<String> set = new HashSet<String>();
 
 	Map<String, Integer> counters;
-
 
 	@Override
 	public void cleanup() {
 
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context) {
 		this.counters = new HashMap<String, Integer>();
 		this.name = context.getThisComponentId();
 		this.id = context.getThisTaskId();
 	}
+
 	@Override
 	public void execute(Tuple input, BasicOutputCollector collector) {
 
@@ -56,16 +55,17 @@ public class CountBolt extends BaseBasicBolt {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		String str = input.getString(0);
-		System.out.println("WordCounter 计数器收到单词 " + str);
+		System.out.println("Received: " + str);
+
 		try {
-			String[] all=str.split("\t", -1);
-			String uid=all[0];
-			String date=all[1];
-			int times=Integer.parseInt(all[2]);
-			int hour=Integer.parseInt(all[3]);
-			String tag=all[4];
+			String[] all = str.split("\t", -1);
+			String uid = all[0];
+			String date = all[1];
+			int times = Integer.parseInt(all[2]);
+			int hour = Integer.parseInt(all[3]);
+			String tag = all[4];
 			String sql = "insert into abnormal_user(uid,date,times,hour,tag) values(?,?,?,?,?)";
 			st = connection.prepareStatement(sql);
 
@@ -79,9 +79,9 @@ public class CountBolt extends BaseBasicBolt {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
+
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 	}

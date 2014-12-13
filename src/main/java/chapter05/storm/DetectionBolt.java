@@ -65,7 +65,6 @@ public class DetectionBolt extends BaseBasicBolt {
 			}
 
 			if ((s1 = map1.get(userId)) != null) {
-
 				if (s.size() == 2) {
 					flag1 = false;
 				} else {
