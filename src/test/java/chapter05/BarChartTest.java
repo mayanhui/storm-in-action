@@ -23,6 +23,7 @@ import org.jfree.data.time.Year;
 import org.jfree.data.xy.IntervalXYDataset;
 
 public class BarChartTest {
+	@SuppressWarnings("deprecation")
 	private static IntervalXYDataset createDataset(){
 		TimeSeriesCollection datase=new TimeSeriesCollection();
 		TimeSeries series=new TimeSeries("������",Year.class);
@@ -74,7 +75,6 @@ public class BarChartTest {
 			ChartUtilities.writeImageMap(pw, filename, info, false);
 			pw.flush();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return filename;
