@@ -124,7 +124,7 @@ public class ProductData {
 		String osName = pd.getOs();
 		userAccount = "0229" + rd.nextInt(9999999);
 		if (userAccount.length() < 12) {
-			String userModel = "111111";
+			String userModel = "1234567890";
 			int a = 11 - userAccount.length();
 			String userResult = userModel
 					.substring((int) Math.random() * 10, a);
@@ -156,7 +156,7 @@ public class ProductData {
 		try {
 			ds = new DatagramSocket();
 			List<String> dataflumn = ProductData.creatData();
-//			System.out.println(dataflumn);
+			// System.out.println(dataflumn);
 			for (String list : dataflumn) {
 				;
 				byte[] by = list.getBytes();
