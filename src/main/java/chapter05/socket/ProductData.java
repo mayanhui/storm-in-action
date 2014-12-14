@@ -69,50 +69,37 @@ public class ProductData {
 	 * create random array.
 	 */
 	public String getDev() {
-		String random = "";
 		int index = (int) (Math.random() * devName1.length);
-		random = devName1[index];
-		return random;
+		return devName1[index];
 	}
 
 	public String getOs() {
-		String random = "";
 		int index = (int) (Math.random() * osName1.length);
-		random = osName1[index];
-		return random;
+		return osName1[index];
 	}
 
 	public String getIP1() {
-		String random = "";
 		int index = (int) (Math.random() * userIP1.length);
-		random = userIP1[index];
-		return random;
+		return userIP1[index];
 	}
 
 	public String getIP2() {
-		String random = "";
 		int index = (int) (Math.random() * userIP2.length);
-		random = userIP2[index];
-		return random;
+		return userIP2[index];
 	}
 
 	public String getIP3() {
-		String random = "";
 		int index = (int) (Math.random() * userIP3.length);
-		random = userIP3[index];
-		return random;
+		return userIP3[index];
 	}
 
 	public String getIP4() {
-		String random = "";
 		int index = (int) (Math.random() * userIP4.length);
-		random = userIP4[index];
-		return random;
+		return userIP4[index];
 	}
 
 	public int getqqID() {
-		Random rd = new Random();
-		qqid1 = rd.nextInt(999999999);
+		qqid1 = new Random().nextInt(999999999);
 		return qqid1;
 	}
 
@@ -169,7 +156,7 @@ public class ProductData {
 		try {
 			ds = new DatagramSocket();
 			List<String> dataflumn = ProductData.creatData();
-			System.out.println(dataflumn);
+//			System.out.println(dataflumn);
 			for (String list : dataflumn) {
 				;
 				byte[] by = list.getBytes();
