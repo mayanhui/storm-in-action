@@ -17,9 +17,6 @@ import java.util.Random;
 
 public class ProductData {
 
-	/**
-	 * ----所涉及到的全局变量模块----
-	 */
 	public static long userTime;
 	public static String userAccount;
 	public static String[] userIP1 = { "223", "175", "202", "110", "221",
@@ -41,7 +38,7 @@ public class ProductData {
 	public static String natIPTest;
 
 	/**
-	 * MD5获取哈希值实现部分
+	 * gen MD5 for string.
 	 */
 	public String md5s(String plainText) {
 		try {
@@ -59,9 +56,9 @@ public class ProductData {
 				buf.append(Integer.toHexString(i));
 			}
 			str = buf.toString();
-			// System.out.println(buf.toString());// 32位的加密
+			// System.out.println(buf.toString());// 32 bit encryption
 			// System.out.println("result: " + buf.toString().substring(8,
-			// 24));// 16位的加密
+			// 24));// 16 bit encryption
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
@@ -69,7 +66,7 @@ public class ProductData {
 	}
 
 	/**
-	 * ----构建数组随机的模块----
+	 * create random array.
 	 */
 	public String getDev() {
 		String random = "";
@@ -126,7 +123,7 @@ public class ProductData {
 	}
 
 	/**
-	 * ----造数据的部分----
+	 * create data
 	 */
 	public static List<String> creatData() {
 		ProductData pd = new ProductData();
@@ -164,7 +161,7 @@ public class ProductData {
 	}
 
 	/**
-	 * ------socket(UDP协议)网络实现部分-------
+	 * send socket-UDP
 	 */
 
 	public void udpSendSocket() {
@@ -186,7 +183,7 @@ public class ProductData {
 	}
 
 	/**
-	 * ----socket(TCP协议)网络实现部分----
+	 * send socket-TCP
 	 */
 	public void tcpSendSocket() {
 		Socket s1 = null;
@@ -214,7 +211,7 @@ public class ProductData {
 	}
 
 	/**
-	 * ----把造出来的数据写到本地----
+	 * write data to local
 	 */
 
 	public static void sendLocal(String result) {
@@ -249,7 +246,7 @@ public class ProductData {
 }
 
 /**
- * ----设置传输频率的模块（利用进程设置的）----
+ * set rate of transform
  */
 class SleepRunner implements Runnable {
 
