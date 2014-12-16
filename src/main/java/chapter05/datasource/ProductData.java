@@ -1,4 +1,4 @@
-package chapter05.socket;
+package chapter05.datasource;
 
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
