@@ -13,9 +13,7 @@ import java.util.Random;
 
 public class SplitData {
 
-	/**
-	 * @param args
-	 */
+	@SuppressWarnings("rawtypes")
 	public static List readfile(String filepath) throws FileNotFoundException,
 			IOException {
 		File file = new File(filepath);
@@ -36,8 +34,8 @@ public class SplitData {
 		return fileList;
 	}
 
+	@SuppressWarnings({ "unused", "unchecked" })
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		BufferedReader br = null;
 		BufferedWriter bw0 = null, bw1 = null, bw2 = null, bw3 = null, bw4 = null;
 		String readLinestr = null;
@@ -60,54 +58,53 @@ public class SplitData {
 			String fileName = file.getName();
 			System.out.println(fileName);
 			String[] fileNamep = fileName.split("\\.", -1);
-			String filepath = filepath = "E:\\GPSData"+"\\N" + fileNamep[0];
+			String filepath = "E:\\GPSData" + "\\N" + fileNamep[0];
 			System.out.println(fileNamep[0]);
-				File file0 = new File(filepath);
-				
+			File file0 = new File(filepath);
 
-				try {
+			try {
 
-					br = new BufferedReader(new FileReader(fl));
-					System.out.println(fl);
-					file0.mkdir();
-					bwArr[0] = new BufferedWriter(new FileWriter(filepath+"\\"+
-							fileNamep[0]+"-0.txt"));
-					bwArr[1] = new BufferedWriter(new FileWriter(filepath+"\\"+
-							fileNamep[0]+"-1.txt"));
-					bwArr[2] = new BufferedWriter(new FileWriter(filepath+"\\"+
-							fileNamep[0]+"-2.txt"));
-					bwArr[3] = new BufferedWriter(new FileWriter(filepath+"\\"+
-							fileNamep[0]+"-3.txt"));
-					bwArr[4] = new BufferedWriter(new FileWriter(filepath+"\\"+
-							fileNamep[0]+"-4.txt"));
+				br = new BufferedReader(new FileReader(fl));
+				System.out.println(fl);
+				file0.mkdir();
+				bwArr[0] = new BufferedWriter(new FileWriter(filepath + "\\"
+						+ fileNamep[0] + "-0.txt"));
+				bwArr[1] = new BufferedWriter(new FileWriter(filepath + "\\"
+						+ fileNamep[0] + "-1.txt"));
+				bwArr[2] = new BufferedWriter(new FileWriter(filepath + "\\"
+						+ fileNamep[0] + "-2.txt"));
+				bwArr[3] = new BufferedWriter(new FileWriter(filepath + "\\"
+						+ fileNamep[0] + "-3.txt"));
+				bwArr[4] = new BufferedWriter(new FileWriter(filepath + "\\"
+						+ fileNamep[0] + "-4.txt"));
 
-					while ((readLinestr = br.readLine()) != null) {
-						fileNum = random.nextInt(5);
-						System.out.println(fileNum);
-						System.out.println(readLinestr);
-						bwArr[fileNum].write(readLinestr);
-						bwArr[fileNum].newLine();
-						bwArr[fileNum].flush();
+				while ((readLinestr = br.readLine()) != null) {
+					fileNum = random.nextInt(5);
+					System.out.println(fileNum);
+					System.out.println(readLinestr);
+					bwArr[fileNum].write(readLinestr);
+					bwArr[fileNum].newLine();
+					bwArr[fileNum].flush();
 
-					}
+				}
 
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}finally{
-					if(br!=null){
-						try {
-							br.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (br != null) {
+					try {
+						br.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
-			
+			}
+
 		}
 	}
 }

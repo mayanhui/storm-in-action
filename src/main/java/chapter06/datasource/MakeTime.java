@@ -5,36 +5,33 @@ import java.io.BufferedWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-//class parseTime{
-//	public String add(String time,int s){
-//		String []timeArr=time.split(" ");
-//		String []timeArr2=timeArr[1].split(":");
-//		int hour=Integer.parseInt(timeArr2[0]);
-//		int minute=Integer.parseInt(timeArr2[1]);
-//		int second=Integer.parseInt(timeArr2[2]);
-//		second+=s;
-//		if(second>=60){
-//			minute++;
-//			second=second-60;
-//			if(minute>=60){
-//				hour++;
-//				minute=minute-60;
-//			}
-//		}
-//		return timeArr[0]+" "+hour+":"+minute+":"+second;
-//		
-//	}
-//}
+
+/*class parseTime {
+	public String add(String time, int s) {
+		String[] timeArr = time.split(" ");
+		String[] timeArr2 = timeArr[1].split(":");
+		int hour = Integer.parseInt(timeArr2[0]);
+		int minute = Integer.parseInt(timeArr2[1]);
+		int second = Integer.parseInt(timeArr2[2]);
+		second += s;
+		if (second >= 60) {
+			minute++;
+			second = second - 60;
+			if (minute >= 60) {
+				hour++;
+				minute = minute - 60;
+			}
+		}
+		return timeArr[0] + " " + hour + ":" + minute + ":" + second;
+
+	}
+}*/
 public class MakeTime {
 
-	/**
-	 * @param args
-	 */
-	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BufferedReader br = null;
@@ -73,7 +70,6 @@ public class MakeTime {
 //				bw.flush();
 //			
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //
