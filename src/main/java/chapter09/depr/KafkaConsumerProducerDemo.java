@@ -14,19 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package chapter09.deprecated;
+package chapter09.depr;
 
-
-import java.nio.ByteBuffer;
-import kafka.message.Message;
-
-public class ExampleUtils
+public class KafkaConsumerProducerDemo implements KafkaProperties
 {
-  public static String getMessage(Message message)
+  public static void main(String[] args)
   {
-    ByteBuffer buffer = message.payload();
-    byte [] bytes = new byte[buffer.remaining()];
-    buffer.get(bytes);
-    return new String(bytes);
+    Producer producerThread = new Producer(KafkaProperties.topic);
+    producerThread.start();
+
+    Consumer consumerThread = new Consumer(KafkaProperties.topic);
+    consumerThread.start();
+    
   }
 }
