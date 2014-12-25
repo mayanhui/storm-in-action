@@ -1,4 +1,4 @@
-package chapter09.adclick;
+package chapter09.storm.adclick;
 
 import java.io.IOException;
 import java.util.Map;
