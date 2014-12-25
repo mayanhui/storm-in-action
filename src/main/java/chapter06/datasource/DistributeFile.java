@@ -10,9 +10,7 @@ import java.util.List;
 
 public class DistributeFile {
 
-	/**
-	 * @param args
-	 */
+	@SuppressWarnings("rawtypes")
 	public static List readfile(String filepath) throws FileNotFoundException,
 			IOException {
 		File file = new File(filepath);
@@ -25,7 +23,6 @@ public class DistributeFile {
 				// System.out.println("absolutepath="
 				// + readfile.getAbsolutePath());
 				// System.out.println("name=" + readfile.getName());
-
 				String deractoryName = readfile.getName();
 				fileList.add(deractoryName);
 			}
@@ -34,19 +31,17 @@ public class DistributeFile {
 		return fileList;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		FileInputStream input = null;
 		FileOutputStream output = null;
-		
+
 		List<String> deractoryList = new ArrayList<String>();
 		try {
-			deractoryList=DistributeFile.readfile("E:\\GPSData\\");
+			deractoryList = DistributeFile.readfile("E:\\GPSData\\");
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		for (String list : deractoryList) {
@@ -54,33 +49,39 @@ public class DistributeFile {
 			for (int fileNum = 0; fileNum < 5; fileNum++) {
 				try {
 
-					input = new FileInputStream("E:\\GPSData\\" + list + "\\"+fileNamep[0].substring(1,2)+"-"
-							+ fileNum + ".txt");
+					input = new FileInputStream("E:\\GPSData\\" + list + "\\"
+							+ fileNamep[0].substring(1, 2) + "-" + fileNum
+							+ ".txt");
 					switch (fileNum) {
 					case 0:
 						output = new FileOutputStream(
-								"E:\\DistributeData\\MachineOne\\"+fileNamep[0].substring(1,2)+"-" + fileNum
-										+ ".txt");
+								"E:\\DistributeData\\MachineOne\\"
+										+ fileNamep[0].substring(1, 2) + "-"
+										+ fileNum + ".txt");
 						break;
 					case 1:
 						output = new FileOutputStream(
-								"E:\\DistributeData\\MachineTwo\\"+fileNamep[0].substring(1,2)+"-" + fileNum
-										+ ".txt");
+								"E:\\DistributeData\\MachineTwo\\"
+										+ fileNamep[0].substring(1, 2) + "-"
+										+ fileNum + ".txt");
 						break;
 					case 2:
 						output = new FileOutputStream(
-								"E:\\DistributeData\\MachineThree\\"+fileNamep[0].substring(1,2)+"-"
+								"E:\\DistributeData\\MachineThree\\"
+										+ fileNamep[0].substring(1, 2) + "-"
 										+ fileNum + ".txt");
 						break;
 					case 3:
 						output = new FileOutputStream(
-								"E:\\DistributeData\\MachineFour\\"+fileNamep[0].substring(1,2)+"-" + fileNum
-										+ ".txt");
+								"E:\\DistributeData\\MachineFour\\"
+										+ fileNamep[0].substring(1, 2) + "-"
+										+ fileNum + ".txt");
 						break;
 					case 4:
 						output = new FileOutputStream(
-								"E:\\DistributeData\\MachineFive\\"+fileNamep[0].substring(1,2)+"-" +fileNum
-										+ ".txt");
+								"E:\\DistributeData\\MachineFive\\"
+										+ fileNamep[0].substring(1, 2) + "-"
+										+ fileNum + ".txt");
 						break;
 					}
 
@@ -90,10 +91,8 @@ public class DistributeFile {
 						i = input.read();
 					}
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
