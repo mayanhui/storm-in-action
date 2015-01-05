@@ -32,6 +32,7 @@ public class CalcluateGeThanBolt extends BaseRichBolt{
 		this.desc = desc;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context,
 			OutputCollector collector) {

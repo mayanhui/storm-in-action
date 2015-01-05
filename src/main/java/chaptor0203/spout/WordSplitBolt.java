@@ -20,10 +20,13 @@ public class WordSplitBolt extends BaseRichBolt {
 	 */
 	private static final long serialVersionUID = 5856179550908037438L;
 
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private Map stormConf;
+	@SuppressWarnings("unused")
 	private TopologyContext context;
 	private OutputCollector collector;
 	
+	@SuppressWarnings("rawtypes")
 	public void prepare(Map stormConf, TopologyContext context,
 			OutputCollector collector) {
 		this.stormConf = stormConf;

@@ -27,6 +27,7 @@ public class ClassifyBolt extends BaseRichBolt{
 	
 	private OutputCollector collector;
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context,
 			OutputCollector collector) {

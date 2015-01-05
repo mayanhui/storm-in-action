@@ -11,32 +11,37 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
+@SuppressWarnings("serial")
 public class WordCount implements IBasicBolt {
-    private Map<String, Integer> _counts = new HashMap<String, Integer>();
-    @Override
-    public void prepare(Map conf, TopologyContext context) {
-    }
+	private Map<String, Integer> _counts = new HashMap<String, Integer>();
 
-    @Override
-   public void execute(Tuple tuple, BasicOutputCollector collector) {
-          String word = tuple.getString(0);
-          int count;
-          if(_counts.containsKey(word)) {
-                 count = _counts.get(word);
-          } else {
-                 count = 0;
-}
-          count++;
-          _counts.put(word, count);
-          collector.emit(new Values(word, count));
-   }
-    @Override
-   public void cleanup() {
-   }
-    @Override
-   public void declareOutputFields(OutputFieldsDeclarer declarer) {
-          declarer.declare(new Fields("word", "count"));
-   }
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void prepare(Map conf, TopologyContext context) {
+	}
+
+	@Override
+	public void execute(Tuple tuple, BasicOutputCollector collector) {
+		String word = tuple.getString(0);
+		int count;
+		if (_counts.containsKey(word)) {
+			count = _counts.get(word);
+		} else {
+			count = 0;
+		}
+		count++;
+		_counts.put(word, count);
+		collector.emit(new Values(word, count));
+	}
+
+	@Override
+	public void cleanup() {
+	}
+
+	@Override
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields("word", "count"));
+	}
 
 	@Override
 	public Map<String, Object> getComponentConfiguration() {
@@ -44,4 +49,3 @@ public class WordCount implements IBasicBolt {
 		return null;
 	}
 }
-
