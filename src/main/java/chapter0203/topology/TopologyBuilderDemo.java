@@ -1,13 +1,13 @@
-package chaptor0203.topology;
+package chapter0203.topology;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
-import chaptor0203.bolt.CalcluateGeThanBolt;
-import chaptor0203.bolt.CalcluateLessThanBolt;
-import chaptor0203.bolt.ClassifyBolt;
-import chaptor0203.spout.RandomSpout;
+import chapter0203.bolt.CalcluateGeThanBolt;
+import chapter0203.bolt.CalcluateLessThanBolt;
+import chapter0203.bolt.ClassifyBolt;
+import chapter0203.spout.RandomSpout;
 
 public class TopologyBuilderDemo {
 

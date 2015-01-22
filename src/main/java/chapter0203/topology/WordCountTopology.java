@@ -1,4 +1,4 @@
-package chaptor0203.topology;
+package chapter0203.topology;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import backtype.storm.generated.AlreadyAliveException;
 import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
-import chaptor0203.bolt.SplitSentence;
-import chaptor0203.bolt.WordCountBolt;
+import chapter0203.bolt.SplitSentence;
+import chapter0203.bolt.WordCountBolt;
 
 public class WordCountTopology {
 	public static void main(String[] args) {

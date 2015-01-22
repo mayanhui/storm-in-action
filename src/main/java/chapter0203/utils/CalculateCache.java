@@ -1,4 +1,4 @@
-package chaptor0203.utils;
+package chapter0203.utils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;

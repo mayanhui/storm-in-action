@@ -1,4 +1,4 @@
-package chaptor0203.spout;
+package chapter0203.spout;
 
 import java.util.Map;
 

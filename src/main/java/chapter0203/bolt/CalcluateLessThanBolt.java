@@ -1,4 +1,4 @@
-package chaptor0203.bolt;
+package chapter0203.bolt;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,7 +8,7 @@ import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseRichBolt;
 import backtype.storm.tuple.Tuple;
-import chaptor0203.utils.CalculateCache;
+import chapter0203.utils.CalculateCache;
 
 
 public class CalcluateLessThanBolt  extends BaseRichBolt{

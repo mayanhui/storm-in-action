@@ -1,4 +1,4 @@
-package chaptor0203.bolt;
+package chapter0203.bolt;
 
 import java.util.HashMap;
 import java.util.Map;
