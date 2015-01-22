@@ -6,11 +6,11 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <display-name></display-name>
   <servlet>
-    <servlet-name>HBaseConServlet</servlet-name>
-    <servlet-class>servlet.HBaseConServlet</servlet-class>
+    <servlet-name>ChartServlet</servlet-name>
+    <servlet-class>chapter07.web.ChartServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>HBaseConServlet</servlet-name>
-    <url-pattern>/hbase</url-pattern>
+    <servlet-name>ChartServlet</servlet-name>
+    <url-pattern>/chart</url-pattern>
   </servlet-mapping>	
 </web-app>

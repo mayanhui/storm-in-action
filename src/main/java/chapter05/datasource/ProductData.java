@@ -122,7 +122,7 @@ public class ProductData {
 				+ "." + pd.getIP4();
 		String devName = pd.getDev();
 		String osName = pd.getOs();
-		userAccount = "0229" + rd.nextInt(9999999);
+		userAccount = "9" + rd.nextInt(9999999);
 		if (userAccount.length() < 12) {
 			String userModel = "1234567890";
 			int a = 11 - userAccount.length();
