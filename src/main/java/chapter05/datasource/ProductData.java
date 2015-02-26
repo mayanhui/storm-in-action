@@ -26,15 +26,15 @@ public class ProductData {
 	public static String[] userIP3 = { "0", "128", "255", "191", "135", "100",
 			"63", "103", "144", "159", "136", "143" };
 	public static String[] userIP4 = { "0", "255" };
-	public static int qqid;
-	public static String natIP;
-	public static String cookieValue;
+	public static int skypeid;
+	public static String innerIP;
+	public static String privateValue;
 	public static String[] devName1 = { "MacBook Pro mac", "iphone 5s",
 			"Thinkpad" };
 	public static String[] osName1 = { "os x 10.9", "ios", "win 8" };
 	public static String str;
 	public static String data;
-	public static int qqid1;
+	public static int skypeid1;
 	public static String natIPTest;
 
 	/**
@@ -98,15 +98,14 @@ public class ProductData {
 		return userIP4[index];
 	}
 
-	public int getqqID() {
-		qqid1 = new Random().nextInt(999999999);
-		return qqid1;
+	public int getSkypeID() {
+		skypeid1 = new Random().nextInt(999999999);
+		return skypeid1;
 	}
 
-	public String getNatIP() {
+	public String getInnerIP() {
 		java.util.Random rd = new java.util.Random();
-		String natIPTest = rd.nextInt(255) + "." + rd.nextInt(255);
-		return natIPTest;
+		return rd.nextInt(255) + "." + rd.nextInt(255);
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class ProductData {
 		Random rd = new Random((long) (Math.random() * 75));
 		List<String> dd = new ArrayList<String>();
 		userTime = System.currentTimeMillis();
-		natIP = "192" + "." + "168" + "." + pd.getNatIP();
+		innerIP = "192" + "." + "168" + "." + pd.getInnerIP();
 		String userIP = pd.getIP1() + "." + pd.getIP2() + "." + pd.getIP3()
 				+ "." + pd.getIP4();
 		String devName = pd.getDev();
@@ -131,16 +130,16 @@ public class ProductData {
 			userAccount = userAccount + userResult;
 		}
 		int times = rd.nextInt(25) + 1;
-		qqid = pd.getqqID();
+		skypeid = pd.getSkypeID();
 		for (int i = 0; i < times; i++) {
 			int s = rd.nextInt(3);
 			if (s == 2) {
-				qqid = pd.getqqID();
-				natIP = "192" + "." + "168" + "." + pd.getNatIP();
-				cookieValue = pd.md5s(userAccount);
+				skypeid = pd.getSkypeID();
+				innerIP = "192" + "." + "168" + "." + pd.getInnerIP();
+				privateValue = pd.md5s(userAccount);
 			}
 			String data = userTime + "\t" + userAccount + "\t" + userIP + "\t"
-					+ qqid + "\t" + natIP + "\t" + cookieValue + "\t" + devName
+					+ skypeid + "\t" + innerIP + "\t" + privateValue + "\t" + devName
 					+ "\t" + osName + "\n";
 			dd.add(data);
 		}
