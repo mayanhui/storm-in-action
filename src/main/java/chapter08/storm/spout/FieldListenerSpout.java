@@ -48,8 +48,6 @@ public class FieldListenerSpout implements IRichSpout {
 
 	public void nextTuple() {
 
-		// Utils.sleep(1000);
-		// RandomAccessFile access = null;
 		String line = null;
 		BufferedReader access = new BufferedReader(fileReader);
 		try {
