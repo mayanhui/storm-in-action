@@ -14,7 +14,6 @@ public class SQLManager {
 			// 写入驱动所在处，打开驱动
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// 数据库，用户，密码，创建与具体数据库的连接
-			// conn=DriverManager.getConnection("jdbc:mysql://172.20.36.247:3306/"+databaseName,userName,password);
 			conn = DriverManager.getConnection("jdbc:mysql://" + host + ":"
 					+ port + "/" + databaseName, userName, password);
 			// 创建执行sql语句的对象
@@ -76,18 +75,12 @@ public class SQLManager {
 	}
 
 	public static void main(String[] args) throws SQLException {
+		String ip = "192.168.170.10";
 
-		SQLManager mysql = new SQLManager("172.20.36.247", "3306", "realOD",
+		SQLManager mysql = new SQLManager(ip, "3306", "realOD",
 				"ghchen", "ghchen");
 
-		// String s=mysql.select("select * from realOD.count;");
-		// System.out.println(s);
-
-		// int
-		// b=mysql.query("insert into realOD.count(time,districtID,count) values('2013-04-09 12:00:59',10101,99 );");
-		// System.out.println(b);
-
-		mysql = new SQLManager("172.20.36.247", "3306", "realTimeTraffic",
+		mysql = new SQLManager(ip, "3306", "realTimeTraffic",
 				"ghchen", "ghchen");
 		String s = mysql.select("select * from realTimeTraffic.roadSpeed;");
 		System.out.println(s);

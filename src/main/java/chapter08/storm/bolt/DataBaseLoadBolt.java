@@ -14,6 +14,7 @@ import backtype.storm.topology.IRichBolt;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Tuple;
 
+@SuppressWarnings("serial")
 public class DataBaseLoadBolt implements IRichBolt {
 
 	SQLManager mysql = null;
@@ -38,6 +39,7 @@ public class DataBaseLoadBolt implements IRichBolt {
 	ArrayList<Road> szRoads = new ArrayList<Road>();
 	Map<String, Road> roadMap = new HashMap<String, Road>();
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context,
 			OutputCollector collector) {
@@ -57,7 +59,7 @@ public class DataBaseLoadBolt implements IRichBolt {
 			mysql = new SQLManager("172.20.36.247", "3306", "realTimeTraffic",
 					"ghchen", "ghchen");
 		Date nowDate = new Date();
-		int min = nowDate.getMinutes();
+		@SuppressWarnings("deprecation")
 		int second = nowDate.getSeconds();
 		if ( /* (min%2) ==0 && */(second == 0)) {
 
@@ -80,10 +82,6 @@ public class DataBaseLoadBolt implements IRichBolt {
 	@Override
 	public Map<String, Object> getComponentConfiguration() {
 		return null;
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 	public static void writeToMysql(SQLManager mysql, Map<String, Road> roadMap) {

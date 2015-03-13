@@ -34,12 +34,13 @@ public class SocketJava {
 	static OutputStream output = null;
 	static String encryptText = "siatxdata\r\ngps\r\n";
 
-	@SuppressWarnings("unused")
+	static String ip = "192.168.170.10";
+
 	public static void main(String[] args) throws Exception {
 
 		try {
 			if (sock == null)
-				sock = new Socket("210.75.252.138", 5557);
+				sock = new Socket(ip, 5557);
 			output = sock.getOutputStream();
 			output.write(encryptText.getBytes());
 			output.flush();
@@ -62,14 +63,14 @@ public class SocketJava {
 								.println("connection reset, reconnecting ...");
 						sock.close();
 						Thread.sleep(1000);
-						sock = new Socket("172.20.14.204", 15025);
+						sock = new Socket(ip, 15025);
 						output = sock.getOutputStream();
 						output.write(encryptText.getBytes());
 						output.flush();
 					}
 
 				} else {
-					sock = new Socket("210.75.252.138", 5557);
+					sock = new Socket(ip, 5557);
 					output = sock.getOutputStream();
 					output.write(encryptText.getBytes());
 					output.flush();
@@ -92,11 +93,9 @@ public class SocketJava {
 			}
 
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			sock.close();
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			sock.close();
 		}
@@ -115,16 +114,13 @@ public class SocketJava {
 	public static String DissectOneMessage(int ch, byte[] msg) throws Exception {
 		switch (ch) {
 		case 0x02:
-			// System.out.println("received GPS record ! len="+len+"\t");
 			System.out.print(".");
 			String mm = DissectPositionInfo(msg, msg.length);
 			return mm;
 		case 0x03:
-			// System.out.println("received warning record ! len="+len+"\n");
 			System.out.print("#");
 			break;
 		case 0x04:
-			// System.out.println("received operation record ! len="+len+"\n");
 			System.out.print("*");
 			break;
 		default:
@@ -215,22 +211,13 @@ public class SocketJava {
 				GPSline = GPSline + df2.format(dLan) + ",";
 				break;
 			case POSINFO_REPORT_TIME:
-
 				df2.applyPattern("00");
-				// System.out.println(df2.format(1.2));
-
 				tempshort1 = (short) bytesToShort(unit_value);
-
 				tempshort2 = (short) unit_value[2];
-
 				tempshort3 = (short) unit_value[3];
-
 				tempshort4 = (short) unit_value[4];
-
 				tempshort5 = (short) unit_value[5];
-
 				tempshort6 = (short) unit_value[6];
-				// System.out.println("	Date: "+tempshort1+"-"+tempshort2+"-"+tempshort3+"-"+tempshort4+"-"+tempshort5+"-"+tempshort6+"\t");
 				GPSline = GPSline + tempshort1 + "-" + df2.format(tempshort2)
 						+ "-" + df2.format(tempshort3) + " "
 						+ df2.format(tempshort4) + ":" + df2.format(tempshort5)
@@ -245,44 +232,34 @@ public class SocketJava {
 				else if (unit_len == 8)
 					sim = bytesToLong(unit_value);
 
-				// System.out.println("	Device ID:"+tempint+"\t");
 				GPSline = GPSline + sim + ",";
 				break;
 			case POSINFO_SPEED:
 
 				tempshort1 = (short) bytesToShort(unit_value);
-				// System.out.println("	Speed:"+tempshort1+"\t");
 				GPSline = GPSline + df2.format(tempshort1) + ",";
 				break;
 			case POSINFO_DIRECTION:
 				if (unit_len >= 2) {
 					tempshort1 = (short) bytesToShort(unit_value);
-					// System.out.println("	Bearing:"+tempshort1+"\t");
-					// df2.applyPattern("000");
 					GPSline = GPSline + (short) (tempshort1 / 100) + ",";
 				}
 				break;
 			case POSINFO_LOCATION_STATUS:
 				tempchar = (char) unit_value[0];
 				tempshort1 = (short) tempchar;
-				// System.out.println("	positioning status:"+tempshort1+"\t");
-				// GPSline=GPSline+tempshort1 +",";
 				break;
 			case ALARMINFO_SIM_NUMBER:
 				plate = new String(unit_value, "GBK");
-				// System.out.println("	SIM NO.:"+plate+"\t");
-				// GPSline=GPSline+plate+",";
 				plate = null;
 				break;
 			case ALARMINFO_CAR_STATUS:
 				tempchar = (char) unit_value[0];
 				tempshort1 = (short) tempchar;
-				// System.out.println("	With passenger:"+tempshort1+"\t");
 				GPSline = GPSline + tempshort1 + ",";
 				break;
 			case ALARMINFO_CAR_COLOUR:
 				plate = new String(unit_value, "GBK");
-				// System.out.println("	Car Color:"+plate+"\n");
 				GPSline = GPSline + plate + "\n";
 				plate = null;
 
@@ -296,7 +273,6 @@ public class SocketJava {
 				String nowTime = sdf2.format(nowDate);
 				String cur_dir = System.getProperty("user.dir");
 				String path = cur_dir + "/rawGPSData/" + sdf3.format(nowDate);
-				// CountBolt.newFolder(path);
 				SpeedProcessBolt.newFolder(path);
 
 				int min = nowDate.getMinutes();
@@ -312,19 +288,7 @@ public class SocketJava {
 						+ sdf4.format(nowDate) + df2.format(min) + "-"
 						+ df2.format(second);
 
-				// FieldListenerSpout.writeToFile(path,GPSline);
-
-				// System.out.println("GPSline = "+GPSline);
 				return GPSline;
-				// String[] newGps=GPSline.split(",");
-				// System.out.println("newGps.length = "+newGps.length);
-				// for(int i=0;i<newGps.length;i++){
-				// System.out.print(newGps[i]+",");}
-
-				// out=newGps[0]+","+newGps[3]+","+newGps[7]+","+newGps[5]+","+
-				// newGps[6]+","+newGps[2]+","+newGps[1]+"\n";
-				//
-				// return out;
 
 			default:
 				System.out
