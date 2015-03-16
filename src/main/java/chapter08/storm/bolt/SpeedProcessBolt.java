@@ -122,7 +122,6 @@ public class SpeedProcessBolt implements IRichBolt {
 	BufferedWriter br;
 	int count = 0;
 
-	@SuppressWarnings("null")
 	@Override
 	public void execute(Tuple input) {
 
