@@ -17,7 +17,8 @@ import backtype.storm.tuple.Tuple;
 @SuppressWarnings("serial")
 public class DataBaseLoadBolt implements IRichBolt {
 
-	SQLManager mysql = null;
+	SQLManager mysql;
+	String ip = "192.168.170.10";
 
 	public class Road {
 		Date nowDate;
@@ -56,8 +57,8 @@ public class DataBaseLoadBolt implements IRichBolt {
 		roadMap.put(roadID, road);
 
 		if (mysql == null)
-			mysql = new SQLManager("172.20.36.247", "3306", "realTimeTraffic",
-					"ghchen", "ghchen");
+			mysql = new SQLManager(ip, "3306", "realTimeTraffic", "hadoop",
+					"hadoop");
 		Date nowDate = new Date();
 		@SuppressWarnings("deprecation")
 		int second = nowDate.getSeconds();
